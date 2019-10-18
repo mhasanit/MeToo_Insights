@@ -39,68 +39,31 @@ df[['Text','word_count']].head(2)
 # In[ ]:
 
 
-#Preliminary exploratiog text 
+#Preliminary exploratiog our tweets 
 #Fetch wordcount for each Tweet
 df['word_count'] = df['Text'].apply(lambda x: len(str(x).split(" ")))
 df[['Text','word_count']].head(2)
 
-
-# In[ ]:
-
-
 df.word_count.describe()
-
-#df.shape[0]
-
-
-# In[ ]:
-
 
 #How many words in the dataset
 df['word_count'].sum()
-
-
-# In[ ]:
-
 
 #get common words
 #Series.value_counts() return a Series containing counts of unique values in descending order, Excludes NA values by default.
 mfreq = pandas.Series(' '.join(df['Text']).split()).value_counts()[:25]
 mfreq
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
 #get uncommon words
 unfreq =  pandas.Series(' '.join(df 
          ['Text']).split()).value_counts()[-25:]
 unfreq
-
-
-# In[ ]:
-
-
 
 #import stop words from package and adding custom stopwords
 stop_words = set(stopwords.words("english"))
 #Creating a list of custom stopwords
 new_words = ["http","using", "show", "result", "large", "also", "iv", "one", "two", "nshe","new", "previously", "shown",'http',"xa","xe","rt","oct","th","co","metoo","amp","ever"]
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 #Noise removal, Normalization(just removes the last few characters)
@@ -138,9 +101,6 @@ for i in range(0, df.shape[0]):#df.shape[0] get how many rows in dataset
     corp.append(txt)
 
 
-# In[ ]:
-
-
 wordcloud = WordCloud(width=1600, height=800).generate(str(corp))
 #  plot word cloud image.
 
@@ -151,22 +111,11 @@ plt.tight_layout(pad=0)
 plt.show()
 
 
-# In[ ]:
-
-
 #Creating a vector of word counts
 #ignore terms that appear in more than 70% of the tweets
 cvec=CountVectorizer(max_df=0.7,stop_words=stop_words, max_features=10000, ngram_range=(1,3))
 Fit=cvec.fit_transform(corp)
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 #Most frequent single words after deleting stop words
@@ -187,9 +136,6 @@ top_df.columns=["Word", "Frequency"]
 sb.set(rc={'figure.figsize':(13,8)})
 k = sb.barplot(x="Word", y="Frequency", data=top_df)
 k.set_xticklabels(k.get_xticklabels(), rotation=30)
-
-
-# In[ ]:
 
 
 #Most frequent  Bi-grams
@@ -214,10 +160,7 @@ b=sb.barplot(x="Bi-gram", y="Frequency", data=top2_df)
 b.set_xticklabels(b.get_xticklabels(), rotation=45)
 
 
-# In[ ]:
-
-
-# Getm ost frequent Tri-grams
+# Get ost frequent Tri-grams
 def fetch_top_n3words(corp, n=None):
     vecn3 = CountVectorizer(ngram_range=(3,3), 
            max_features=2000).fit(corp)
@@ -239,22 +182,10 @@ p=sb.barplot(x="Tri-gram", y="Frequency", data=top3_df)
 p.set_xticklabels(p.get_xticklabels(), rotation=45)
 
 
-# In[ ]:
-
-
 #Get the most popular tweet
 df['Total']=df['Favorite_count']+df['Retweet_count']
 Mot_Popular=df[df['Total']>=df['Total'].max()]
 Mot_Popular[['Text','Total']].head(1)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 #Show number of tweets by device/mobile or platform comming from
@@ -267,8 +198,6 @@ plt.xlabel("Number of Tweets by its Source")#.encode('utf-8')
 plt.ylabel("")
 plt.show()
 
-
-# In[ ]:
 
 
 
