@@ -1,2 +1,2 @@
 # MeToo_Insights
-This mini project shows and unlock some insights from #MeToo hashtag 
+This is mini project shows and unlock some insights from #MeToo hashtag 
