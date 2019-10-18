@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
-
 #nltk.download('stopwords') remove Comment tag and install this package
 #nltk.download('wordnet') remove Comment tag and install this package
 import pandas
@@ -28,15 +25,6 @@ df = pandas.read_csv('Metoo_tweets.csv')
 #Fetch how many word in each Tweet
 df['word_count'] = df['Text'].apply(lambda x: len(str(x).split(" ")))
 df[['Text','word_count']].head(2)
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 #Preliminary exploratiog our tweets 
